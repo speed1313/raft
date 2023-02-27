@@ -189,6 +189,7 @@ func (cm *ConsensusModule) AppendEntries(args AppendEntriesArgs, reply *AppendEn
 
 	reply.Success = false
 	if args.Term == cm.currentTerm {
+		// cm.state is expected to be candidate because the number of the leader should be at most one at any time.
 		if cm.state != Follower {
 			cm.becomeFollower(args.Term)
 		}
