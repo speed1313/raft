@@ -530,6 +530,7 @@ func (cm *ConsensusModule) leaderSendHeartbeats() {
 							cm.newCommitReadyChan <- struct{}{}
 						}
 					} else {
+						// Decrement nextIndex and retry.
 						cm.nextIndex[peerId] = ni - 1
 						cm.dlog("AppendEntries reply from %d !success: nextIndex := %d", peerId, ni-1)
 					}
